@@ -1,0 +1,131 @@
+<nb-card>
+  <nb-card-header>
+      <!-- <i class="nb-layout-two-column " style="width: 200; height: 500;" ></i> --> {{mainPageName}}
+  </nb-card-header>
+  
+  <nb-card-body>
+     
+      <ng2-smart-table [settings]="settings" [source]="source" 
+        (deleteConfirm)="onDeleteConfirm($event)" 
+        (delete)="onDeleteRowSelect($event)"
+        (edit)="onEditRowSelect($event,content)"
+        (create)="onAddRowSelect($event,content)">
+      </ng2-smart-table>
+
+  </nb-card-body>
+</nb-card>
+
+<!-- this is for modal -->
+<ng-template #content let-modal> <!-- #content -->
+  <div class="modal-header">
+      <span>{{ modalHeader }}</span>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+      <div class="row">
+          <div class="col-md-12">
+              <nb-card>
+              <nb-card-header>{{formName}}</nb-card-header>
+              <nb-card-body>
+                  
+                  <form #membersForm="ngForm" class="form-horizontal" (ngSubmit)="submitGroup();">
+                  {{membersForm.value | json}}
+                      <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">First Name</label>
+                      <div class="col-sm-9">
+                      <input type="hidden" 
+                              name="memberId" 
+                              #memberId="ngModel" 
+                              [(ngModel)]="membersModel.memberId">
+                      <input type="text" class="form-control" placeholder="Middle Name"
+                              name="firstName" 
+                              #firstName="ngModel" 
+                              [(ngModel)]="membersModel.firstName"
+                              required>
+                      <div *ngIf="firstName.touched" >
+                          <div *ngIf="firstName.errors?.required" class="alert alert-danger">First name is required</div>
+                      </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Middle Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Middle Name"
+                              name="middleName" 
+                              #middleName="ngModel" 
+                              [(ngModel)]="membersModel.middleName"
+                              required>
+                        <div *ngIf="middleName.touched" >
+                            <div *ngIf="middleName.errors?.required" class="alert alert-danger">Middle name is required</div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Last Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" placeholder="Middle Name"
+                            name="lastName" 
+                            #lastName="ngModel" 
+                            [(ngModel)]="membersModel.lastName"
+                            required>
+                      <div *ngIf="lastName.touched" >
+                          <div *ngIf="lastName.errors?.required" class="alert alert-danger">Last name is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Gender</label>
+                    <div class="col-sm-9">
+                      <input type="radio" 
+                              value="M"
+                              name="gender" 
+                              #gender="ngModel" 
+                              [(ngModel)]="membersModel.gender">
+                              Male
+
+                      <input type="radio" 
+                              value="F"
+                              name="gender" 
+                              #gender="ngModel" 
+                              [(ngModel)]="membersModel.gender"/>
+                              Femail
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Date of birth</label>
+                    <div class="col-sm-7 border">
+                      <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                      <!-- <div class="input-group-append"> -->
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">...</button>
+                      </div>
+                  </div>
+
+
+                  <div class="form-group row">
+                      <div class="offset-sm-3 col-sm-9">
+                      <button type="submit" class="btn btn-warning" [disabled]="membersForm.invalid">submit</button> &nbsp;
+                      <button type="reset" class="btn btn-outline-success">Reset</button>
+                      </div>
+                  </div>
+
+                  </form>
+
+              </nb-card-body>
+              </nb-card> 
+          </div>
+      </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-md btn-danger" (click)="closeModal()">Close</button>
+  </div>
+</ng-template>

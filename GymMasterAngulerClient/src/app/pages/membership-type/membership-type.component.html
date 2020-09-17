@@ -1,0 +1,89 @@
+<nb-card>
+  <nb-card-header>
+      <i class="nb-layout-two-column " style="width: 200; height: 500;" ></i> {{mainPageName}}
+  </nb-card-header>
+  
+  <nb-card-body>
+     
+      <ng2-smart-table [settings]="settings" [source]="source" 
+        (deleteConfirm)="onDeleteConfirm($event)" 
+        (delete)="onDeleteRowSelect($event)"
+        (edit)="onEditRowSelect($event,content)"
+        (create)="onAddRowSelect($event,content)">
+      </ng2-smart-table>
+
+  </nb-card-body>
+</nb-card>
+
+<!-- this is for modal -->
+<ng-template #content let-modal> <!-- #content -->
+  <div class="modal-header">
+      <span>{{ modalHeader }}</span>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+      <div class="row">
+          <div class="col-md-12">
+              <nb-card>
+              <nb-card-header>{{formName}}</nb-card-header>
+              <nb-card-body>
+                  
+                  <!-- <form #groupForm="ngForm" class="form-horizontal" (ngSubmit)="submitGroup();">
+                  
+                      <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Group Name</label>
+                      <div class="col-sm-9">
+                      <input type="hidden" 
+                              name="groupId" 
+                              #groupId="ngModel" 
+                              [(ngModel)]="groupMainModel.groupId">
+                      <input type="text" class="form-control" placeholder="Group Name"
+                              name="group_name" 
+                              #group_name="ngModel" 
+                              [(ngModel)]="groupMainModel.group_name"
+                              required>
+                      <div *ngIf="group_name.touched" >
+                          <div *ngIf="group_name.errors?.required" class="alert alert-danger">Name is required</div>
+                      </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-3 form-control-label">Group Image</label>
+                      <div class="col-sm-9">
+                      <input type="file" class="form-control" placeholder="Group Name" 
+                              name="imageName"
+                              (change)="selectFile($event)" 
+                              required>
+                      </div>
+                  </div>
+
+                  <div class="form-group row" >
+                      <img class="image-col" src={{temporyImage}}>
+                      </div>
+
+                  <div class="form-group row">
+                      <div class="offset-sm-3 col-sm-9">
+                      <button type="submit" class="btn btn-warning" [disabled]="groupForm.invalid">submit</button> &nbsp;
+                      <button (click)="resetImage()" type="reset" class="btn btn-outline-success">Reset</button>
+                      </div>
+                  </div>
+
+                  </form> -->
+
+              </nb-card-body>
+              </nb-card> 
+          </div>
+      </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-md btn-danger" (click)="closeModal()">Close</button>
+  </div>
+</ng-template>
+
+
+

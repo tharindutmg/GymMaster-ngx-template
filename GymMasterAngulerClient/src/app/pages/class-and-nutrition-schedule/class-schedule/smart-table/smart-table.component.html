@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>
+      <i class="nb-layout-two-column" style="size: 5000px"></i> Class Schedule
+  </nb-card-header>
+
+  <nb-card-body>
+      <button class="btn btn-success" (click)="showLargeModal()">Large modal</button>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,24 @@
+/* ng2-smart-table*/
+/* :host /deep/ ng2-smart-table table {
+     text-align: center;
+} */
+
+:host /deep/ .image-col {
+    //display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+}
+
+.image-col {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    //width: 50%;
+   // height: 50%;
+   width: 250px;
+    height: 200px;
+    //border-radius: 50%;
+}
